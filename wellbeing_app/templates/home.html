@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n dict_extras%}
 
 {% block content %}
 <div class="container mt-5">
@@ -85,7 +85,7 @@
                         <div class="btn-group reaction-buttons" role="group">
                             {% for key, label in entry.REACTION_CHOICES %}
                             <button class="btn btn-sm {% if entry.user_reaction == key %}btn-primary{% else %}btn-outline-secondary{% endif %} react-btn" data-reaction="{{ key }}">
-                                {{ label }} ({{ entry.reaction_counts.key|default:0 }})
+                                {{ label }} ({{ entry.reaction_counts|get_item:key|default:0 }})
                             </button>
                             {% endfor %}
                         </div>
