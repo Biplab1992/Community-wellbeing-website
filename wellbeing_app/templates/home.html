@@ -84,7 +84,7 @@
                     <div class="reactions mt-3 pt-2 border-top">
                         <div class="btn-group reaction-buttons" role="group">
                             {% for key, label in entry.REACTION_CHOICES %}
-                            <button class="btn btn-sm {% if entry.user_reaction == key %}btn-primary{% else %}btn-outline-secondary{% endif %} react-btn" data-reaction="{{ key }}">
+                            <button class="btn btn-sm {% if entry.user_reaction == key %}btn-primary{% else %}btn-outline-secondary{% endif %} react-btn" data-reaction="{{ key }}"data-label="{{ label}}">
                                 {{ label }} ({{ entry.reaction_counts|get_item:key|default:0 }})
                             </button>
                             {% endfor %}
@@ -164,7 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.querySelectorAll('.react-btn').forEach(btn => {
                         const r = btn.dataset.reaction;
                         const count = data.counts[r] || 0;
-                        btn.textContent = `${r.charAt(0).toUpperCase() + r.slice(1)} (${count})`;
+                        const label = btn.dataset.label;
+                        btn.textContent = `${label} (${count})`;
 
                         btn.classList.remove('btn-primary', 'btn-outline-secondary');
                         btn.classList.add(data.user_reaction === r ? 'btn-primary' : 'btn-outline-secondary');
