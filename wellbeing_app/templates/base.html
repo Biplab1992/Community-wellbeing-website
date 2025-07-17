@@ -39,6 +39,8 @@
     </style>
 </head>
 <body class="{% block body_class %}{% endblock %}">
+    <!-- Global CSRF token for AJAX requests -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
